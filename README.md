@@ -7,5 +7,5 @@ Aplikasi resep masakan tradisional Indonesia | Desktop
 - Anggota 2: Noer Azizah Permata S. - 20/463611/TK/51603
 
 
-#Class Diagram
+## Class Diagram
 ![Ecocipe Class Diagram](/images/Ecocipe-Class-Diagram.png)

@@ -8,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Ecocipe
+namespace Ecocipe.Views
 {
-    public partial class Form1 : Form
+    public partial class Recipe : Form
     {
-        public Form1()
+        public Recipe()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Recipe_Load(object sender, EventArgs e)
         {
 
         }

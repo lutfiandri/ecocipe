@@ -1,0 +1,465 @@
+﻿-- creating table
+
+create table users
+(
+  	id serial primary key,
+  	username character varying(100),
+  	password character varying(200)
+);
+
+alter table users
+	add unique (username); 
+	
+create table recipes
+(
+	id serial primary key,
+  	title varchar(200),
+	author_id int,
+  	duplicate_from_id int,
+  
+  	constraint fk_recipe_author foreign key (author_id) references users(id),
+  	constraint fk_recipe_recipe foreign key (duplicate_from_id) references recipes(id)
+);
+
+create table ingredients
+(
+ 	id serial primary key,
+  	ingredient varchar(200),
+  	recipe_id int,
+  
+  	constraint fk_ingredient_recipe foreign key (recipe_id) references recipes(id)
+
+);
+
+create table steps
+(
+  	id serial primary key,
+  	step varchar(300),
+  	recipe_id int,
+  
+  	constraint fk_step_recipe foreign key (recipe_id) references recipes(id)
+);
+
+-- join
+select * from recipes
+left join ingredients
+on recipes.id = ingredients.recipe_id;
+
+-- FUNCTION	
+
+--- USERS 
+
+--- insert user
+create or replace function insert_user
+(
+  username character varying,
+  password character varying
+)
+returns int AS
+'
+begin
+	insert into users
+    (username, password)
+    values
+    (username, password);
+    
+    if found then
+    	return 1;
+    else
+    	return 0;
+    end if;
+end
+'
+language plpgsql;
+
+--- select all users
+create or replace function select_all_users()
+returns table
+(
+  	id int,
+	username character varying,
+  	password character varying
+)
+language plpgsql
+as
+'
+begin
+	return query
+    select u.id, u.username, u.password from users u;
+end
+';
+
+select * from select_all_users();
+
+--- select user
+create or replace function select_user
+(
+ 	_id int
+)
+returns table
+(
+  	id int,
+	username character varying,
+  	password character varying
+)
+language plpgsql
+as
+'
+begin
+	return query
+    select u.id, u.username, u.password from users u where u.id = _id;
+end
+';
+
+select * from select_user(8);
+
+
+--- update users (don't implement on code)
+create or replace function update_user
+(
+	_id int,
+	_username character varying,
+  	_password character varying
+)
+returns int AS
+'
+begin
+	update users set
+    	username=_username,
+        password=_password
+      	where id=_id;
+    
+    if found then
+    	return 1;
+    else
+    	return 0;
+    end if;
+end
+'
+language plpgsql;
+
+select * from update_user(1, 'lutfiandri', '');
+
+
+
+--- delete user
+create or replace function delete_user
+(
+	_id int
+)
+returns int AS
+'
+begin
+	delete from users
+    	where id=_id;
+    
+    if found then
+    	return 1;
+    else
+    	return 0;
+    end if;
+end
+'
+language plpgsql;
+
+select * from delete_user(8);
+
+
+--- STEPS 
+
+--- insert step
+create or replace function insert_step
+(
+  _step character varying,
+  _recipe_id int
+)
+returns int AS
+'
+begin
+	insert into steps
+    (step, recipe_id)
+    values
+    (_step, _recipe_id);
+    
+    if found then
+    	return 1;
+    else
+    	return 0;
+    end if;
+end
+'
+language plpgsql;
+
+select * from insert_step('masak air lagi', 1);
+
+--- select all steps from specific recipe
+create or replace function select_all_steps
+(
+ 	_recipe_id int
+)
+returns table
+(
+  	id int,
+	step character varying,
+  	recipe_id int
+)
+language plpgsql
+as
+'
+begin
+	return query
+    select s.id, s.step, s.recipe_id from steps s where s.recipe_id = _recipe_id;
+end
+';
+
+select * from select_all_steps(1);
+
+
+--- update step
+create or replace function update_step
+(
+	_id int,
+	_step character varying
+)
+returns int AS
+'
+begin
+	update steps set
+    	step=_step
+      	where id=_id;
+    
+    if found then
+    	return 1;
+    else
+    	return 0;
+    end if;
+end
+'
+language plpgsql;
+
+select * from update_step(1, 'edit masak air');
+
+
+--- delete step
+create or replace function delete_step
+(
+	_id int
+)
+returns int AS
+'
+begin
+	delete from steps
+    	where id=_id;
+    
+    if found then
+    	return 1;
+    else
+    	return 0;
+    end if;
+end
+'
+language plpgsql;
+
+select * from delete_step(1);
+
+
+
+
+--- INGREDIENTS 
+
+--- insert ingredient
+create or replace function insert_ingredient
+(
+  _ingredient character varying,
+  _recipe_id int
+)
+returns int AS
+'
+begin
+	insert into ingredients
+    (ingredient, recipe_id)
+    values
+    (_ingredient, _recipe_id);
+    
+    if found then
+    	return 1;
+    else
+    	return 0;
+    end if;
+end
+'
+language plpgsql;
+
+select * from insert_ingredient('bawang', 1);
+
+--- select all steps from specific recipe
+create or replace function select_all_ingredients
+(
+ 	_recipe_id int
+)
+returns table
+(
+  	id int,
+	ingredient character varying,
+  	recipe_id int
+)
+language plpgsql
+as
+'
+begin
+	return query
+    select i.id, i.ingredient, i.recipe_id from ingredients i where i.recipe_id = _recipe_id;
+end
+';
+
+select * from select_all_ingredients(1);
+
+
+--- update ingredient
+create or replace function update_ingredient
+(
+	_id int,
+	_ingredient character varying
+)
+returns int AS
+'
+begin
+	update ingredients set
+    	ingredient=_ingredient
+      	where id=_id;
+    
+    if found then
+    	return 1;
+    else
+    	return 0;
+    end if;
+end
+'
+language plpgsql;
+
+select * from update_ingredient(1, 'masako');
+
+
+--- delete ingredient
+create or replace function delete_ingredient
+(
+	_id int
+)
+returns int AS
+'
+begin
+	delete from ingredients
+    	where id=_id;
+    
+    if found then
+    	return 1;
+    else
+    	return 0;
+    end if;
+end
+'
+language plpgsql;
+
+select * from delete_ingredient(3);
+
+
+
+
+
+
+
+--- RECIPES 
+
+--- insert recipe
+create or replace function insert_recipe
+(
+  _title character varying,
+  _author_id int,
+  _duplicate_from_id int
+)
+returns int AS
+'
+begin
+	insert into recipes
+    (title, author_id, duplicate_from_id)
+    values
+    (_title, _author_id, _duplicate_from_id);
+    
+    if found then
+    	return 1;
+    else
+    	return 0;
+    end if;
+end
+'
+language plpgsql;
+
+select * from insert_recipe('rendang', 1, null);
+
+--- select all recipes
+create or replace function select_all_recipes()
+returns table
+(
+  	id int,
+	title character varying,
+    author_id int,
+    duplicate_from_id int
+)
+language plpgsql
+as
+'
+begin
+	return query
+    select r.id, r.title, r.author_id, r.duplicate_from_id from recipes r;
+end
+';
+
+select * from select_all_recipes();
+
+
+--- update recipe
+create or replace function update_recipe
+(
+	_id int,
+	_title character varying
+)
+returns int AS
+'
+begin
+	update recipes set
+    	title=_title
+      	where id=_id;
+    
+    if found then
+    	return 1;
+    else
+    	return 0;
+    end if;
+end
+'
+language plpgsql;
+
+select * from update_recipe(1, 'magelangan rendang');
+
+
+--- delete recipe
+create or replace function delete_recipe
+(
+	_id int
+)
+returns int AS
+'
+begin
+	delete from recipes
+    	where id=_id;
+    
+    if found then
+    	return 1;
+    else
+    	return 0;
+    end if;
+end
+'
+language plpgsql;
+
+select * from delete_recipe(2);

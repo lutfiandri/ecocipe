@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ecocipe.Models
 {
-    sealed class AuthenticatedUser
+    sealed class AuthenticatedUser : User
     {
         private string username;
 

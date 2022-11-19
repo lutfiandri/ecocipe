@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbTitle = new System.Windows.Forms.TextBox();
             this.tbCategory = new System.Windows.Forms.TextBox();
             this.rtbIngredients = new System.Windows.Forms.RichTextBox();
             this.rtbSteps = new System.Windows.Forms.RichTextBox();
@@ -44,14 +44,14 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // tbTitle
             // 
-            this.textBox1.Font = new System.Drawing.Font("Inter", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.textBox1.Location = new System.Drawing.Point(60, 281);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(392, 32);
-            this.textBox1.TabIndex = 0;
+            this.tbTitle.Font = new System.Drawing.Font("Inter", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbTitle.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.tbTitle.Location = new System.Drawing.Point(60, 281);
+            this.tbTitle.Name = "tbTitle";
+            this.tbTitle.Size = new System.Drawing.Size(392, 32);
+            this.tbTitle.TabIndex = 0;
             // 
             // tbCategory
             // 
@@ -99,7 +99,7 @@
             this.lblAddRecipe.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(0)))));
             this.lblAddRecipe.Location = new System.Drawing.Point(158, 79);
             this.lblAddRecipe.Name = "lblAddRecipe";
-            this.lblAddRecipe.Size = new System.Drawing.Size(207, 41);
+            this.lblAddRecipe.Size = new System.Drawing.Size(202, 40);
             this.lblAddRecipe.TabIndex = 2;
             this.lblAddRecipe.Text = "Add Recipe";
             // 
@@ -221,7 +221,7 @@
             this.Controls.Add(this.rtbSteps);
             this.Controls.Add(this.rtbIngredients);
             this.Controls.Add(this.tbCategory);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AddRecipe";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -233,7 +233,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbTitle;
         private System.Windows.Forms.TextBox tbCategory;
         private System.Windows.Forms.RichTextBox rtbIngredients;
         private System.Windows.Forms.RichTextBox rtbSteps;

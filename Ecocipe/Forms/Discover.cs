@@ -16,28 +16,15 @@ namespace Ecocipe.Forms
 {
     public partial class Discover : Form
     {
-        public Discover()
+        private NpgsqlConnection conn;
+        public Discover(NpgsqlConnection connection)
         {
             InitializeComponent();
-            
+            conn = connection;
         }
-
-        private NpgsqlConnection conn;
-        private string connstring = "Host=localhost;Port=5432;Username=postgres;Password=kyubi123;Database=ecocipe";
 
         private void Discover_Load(object sender, EventArgs e)
         {
-            try
-            {
-                conn = new NpgsqlConnection(connstring);
-                conn.Open();
-                Console.WriteLine("Database connected");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occured when opening postgres connection.", ex.Message);
-            }
-
             // get all recipes on load
             try
             {
@@ -64,6 +51,7 @@ namespace Ecocipe.Forms
                 }
 
                 PopulateItems(recipes);
+                data.Close();
 
                 Console.WriteLine(data);
             }
@@ -71,20 +59,11 @@ namespace Ecocipe.Forms
             {
                 Console.WriteLine(ex.Message);
             }
-
-            
         }
 
         private void Discover_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try
-            {
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occured when closing postgres connection.", ex.Message);
-            }
+            
         }
 
         private void PopulateItems(List<Recipe> recipes)
@@ -108,6 +87,11 @@ namespace Ecocipe.Forms
                 flowLayoutPanel.Controls.Add(cards[i]);
 
             }
+        }
+
+        private void flowLayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

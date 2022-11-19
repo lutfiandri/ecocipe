@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,14 +13,17 @@ namespace Ecocipe.Forms
 {
     public partial class MyRecipe : Form
     {
-        public MyRecipe()
+        private NpgsqlConnection conn;
+        public MyRecipe(NpgsqlConnection connection)
         {
             InitializeComponent();
+            conn = connection;
+
         }
 
         private void btnAddRecipe_Click(object sender, EventArgs e)
         {
-            var myForm = new AddRecipe();
+            var myForm = new AddRecipe(conn);
             myForm.Show();
         }
     }

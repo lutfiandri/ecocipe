@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,9 @@ namespace Ecocipe
         private Form activeForm;
         private Button currentButton;
 
+        private NpgsqlConnection conn;
+        private readonly string connstring = "Host=localhost;Port=5432;Username=postgres;Password=kyubi123;Database=ecocipe";
+
         //Constructor
         public Dashboard()
         {
@@ -28,6 +32,8 @@ namespace Ecocipe
             this.BackColor = Color.FromArgb(19, 19, 19); //border color
         }
 
+        
+
         //Drag form
         [DllImport("user32.dll", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
@@ -37,7 +43,29 @@ namespace Ecocipe
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Open connection to postgres
+            try
+            {
+                conn = new NpgsqlConnection(connstring);
+                conn.Open();
+                Console.WriteLine("Database connected");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occured when opening postgres connection.", ex.Message);
+            }
+        }
 
+        private void Dashboard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occured when closing postgres connection.", ex.Message);
+            }
         }
 
         private void panelTop_MouseDown(object sender, MouseEventArgs e)
@@ -234,13 +262,13 @@ namespace Ecocipe
 
         private void btnDiscover_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.Discover(), sender);
+            OpenChildForm(new Forms.Discover(conn), sender);
             ActivateMenu(sender);
         }
 
         private void btnMyRecipe_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.MyRecipe(), sender);
+            OpenChildForm(new Forms.MyRecipe(conn), sender);
             ActivateMenu(sender);
         }
 
@@ -259,6 +287,11 @@ namespace Ecocipe
         private void btnLogout_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void panelPage_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         

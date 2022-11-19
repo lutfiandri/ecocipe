@@ -115,6 +115,7 @@
             this.panelPage.Name = "panelPage";
             this.panelPage.Size = new System.Drawing.Size(962, 883);
             this.panelPage.TabIndex = 2;
+            this.panelPage.Paint += new System.Windows.Forms.PaintEventHandler(this.panelPage_Paint);
             // 
             // lblHome
             // 
@@ -309,6 +310,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Dashboard";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Dashboard_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Dashboard_Resize);
             this.panelMenu.ResumeLayout(false);

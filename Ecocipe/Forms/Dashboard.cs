@@ -250,9 +250,17 @@ namespace Ecocipe
             ActivateMenu(sender);
         }
 
+        private void pictureBoxLogo_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.About(), sender);
+            DisableMenu();
+        }
+
         private void btnLogout_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+
+        
     }
 }

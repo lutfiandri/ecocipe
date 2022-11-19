@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using Ecocipe.Properties;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Forms;
 
 namespace Ecocipe.Forms
@@ -16,48 +18,74 @@ namespace Ecocipe.Forms
         public Discover()
         {
             InitializeComponent();
+            
         }
 
-        private NpgsqlConnection conn;
-        private string connstring = "Host=localhost;Port=5432;Username=lutfiandri;Password=glhf;Database=ecocipe";
+        //private NpgsqlConnection conn;
+        //private string connstring = "Host=localhost;Port=5432;Username=lutfiandri;Password=glhf;Database=ecocipe";
 
         private void Discover_Load(object sender, EventArgs e)
         {
-            try
-            {
-                conn = new NpgsqlConnection(connstring);
-                conn.Open();
-                Console.WriteLine("Database connected");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occured when opening postgres connection.", ex.Message);
-            }
+            //try
+            //{
+            //    conn = new NpgsqlConnection(connstring);
+            //    conn.Open();
+            //    Console.WriteLine("Database connected");
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("An error occured when opening postgres connection.", ex.Message);
+            //}
 
-            // get all recipes on load
-            try
-            {
-                var sql = "select * from select_all_recipes()";
-                var cmd = new NpgsqlCommand(sql, conn);
-                var data = cmd.ExecuteReader();
-                // TODO: show to UI (create the UI first)
-                Console.WriteLine(data);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            //// get all recipes on load
+            //try
+            //{
+            //    var sql = "select * from select_all_recipes()";
+            //    var cmd = new NpgsqlCommand(sql, conn);
+            //    var data = cmd.ExecuteReader();
+            //    // TODO: show to UI (create the UI first)
+            //    Console.WriteLine(data);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //}
+
+            populateItems();
         }
 
         private void Discover_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try
+            //try
+            //{
+            //    conn.Close();
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("An error occured when closing postgres connection.", ex.Message);
+            //}
+        }
+
+        private void populateItems()
+        {
+            //populate here
+            Card[] cards = new Card[20];
+            //loop trough each items
+            for (int i = 0; i < cards.Length; i++)
             {
-                conn.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occured when closing postgres connection.", ex.Message);
+                cards[i] = new Card();
+                cards[i].Title = "Get data somewhere";
+                cards[i].Category = "Get category data";
+                cards[i].Details = "Get data details somewhere";
+                cards[i].Picture = Resources.Sample;
+                //add to flowlayout
+                //if (flowLayoutPanel.Controls.Count > 0)
+                //{
+                //    flowLayoutPanel.Controls.Clear();
+                //}
+                //else
+                flowLayoutPanel.Controls.Add(cards[i]);
+
             }
         }
     }

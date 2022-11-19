@@ -104,6 +104,12 @@
     <Compile Include="Forms\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Card.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Card.Designer.cs">
+      <DependentUpon>Card.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Card.resx">
+      <DependentUpon>Card.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
@@ -183,6 +192,8 @@
     <None Include="Resources\iconAbout.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\RecipePic.bmp" />
+    <None Include="Resources\killua_zoldyck__hunter_x_hunter__by_llchoco_dc5746m-fullview.jpg" />
     <Content Include="Resources\TableCreation.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

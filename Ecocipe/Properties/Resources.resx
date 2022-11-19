@@ -136,4 +136,7 @@
   <data name="iconAbout" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconAbout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Sample" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\killua_zoldyck__hunter_x_hunter__by_llchoco_dc5746m-fullview.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

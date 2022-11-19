@@ -134,6 +134,18 @@
     <Compile Include="Forms\MyRecipe.Designer.cs">
       <DependentUpon>MyRecipe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RecipeDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\RecipeDetail.Designer.cs">
+      <DependentUpon>RecipeDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RecipeDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RecipeDetails.Designer.cs">
+      <DependentUpon>RecipeDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AuthenticatedUser.cs" />
     <Compile Include="Models\PublicUser.cs" />
     <Compile Include="Models\Recipe.cs" />
@@ -157,6 +169,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MyRecipe.resx">
       <DependentUpon>MyRecipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RecipeDetail.resx">
+      <DependentUpon>RecipeDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RecipeDetails.resx">
+      <DependentUpon>RecipeDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

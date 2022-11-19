@@ -10,10 +10,9 @@ using System.Windows.Forms;
 
 namespace Ecocipe.Forms
 {
-    public partial class Card : UserControl
+    public partial class RecipeDetail : UserControl
     {
-
-        public Card()
+        public RecipeDetail()
         {
             InitializeComponent();
         }
@@ -22,7 +21,8 @@ namespace Ecocipe.Forms
 
         private string _title;
         private string _category;
-        private string _details;
+        private string _ingredients;
+        private string _steps;
         private Image _picture;
 
         public string Title
@@ -37,24 +37,24 @@ namespace Ecocipe.Forms
             set { _category = value; lblCategory.Text = value; }
         }
         [Category("Custom Props")]
-        public string Details
+        public string Ingredients
         {
-            get { return _details; }   
-            set { _details = value; lblDetails.Text = value; }
+            get { return _ingredients; }
+            set { _ingredients = value; gbIngredients.Text = value; }
+        }
+        [Category("Custom Props")]
+        public string Steps
+        {
+            get { return _steps; }
+            set { _steps = value; gbSteps.Text = value; }
         }
         [Category("Custom Props")]
         public Image Picture
         {
             get { return _picture; }
-            set { _picture = value; pbPicture.Image = value; }
+            set { _picture = value; pbImage.Image = value; }
         }
 
         #endregion
-
-        private void pnlCard_Click(object sender, EventArgs e)
-        {
-            var myForm = new RecipeDetails();
-            myForm.Show();
-        }
     }
 }

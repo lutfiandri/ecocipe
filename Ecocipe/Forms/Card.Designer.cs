@@ -32,10 +32,10 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblCategory = new System.Windows.Forms.Label();
             this.lblDetails = new System.Windows.Forms.Label();
+            this.pnlCard = new System.Windows.Forms.Panel();
             this.pbPicture = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPicture)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -53,11 +53,11 @@
             // lblCategory
             // 
             this.lblCategory.AutoSize = true;
-            this.lblCategory.Font = new System.Drawing.Font("Inter Medium", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCategory.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCategory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
-            this.lblCategory.Location = new System.Drawing.Point(28, 376);
+            this.lblCategory.Location = new System.Drawing.Point(28, 378);
             this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(106, 24);
+            this.lblCategory.Size = new System.Drawing.Size(87, 20);
             this.lblCategory.TabIndex = 2;
             this.lblCategory.Text = "Category";
             // 
@@ -66,11 +66,24 @@
             this.lblDetails.AutoSize = true;
             this.lblDetails.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDetails.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(119)))), ((int)(((byte)(119)))), ((int)(((byte)(119)))));
-            this.lblDetails.Location = new System.Drawing.Point(29, 406);
+            this.lblDetails.Location = new System.Drawing.Point(29, 407);
             this.lblDetails.Name = "lblDetails";
             this.lblDetails.Size = new System.Drawing.Size(177, 16);
             this.lblDetails.TabIndex = 3;
             this.lblDetails.Text = "Lorem ipsum dolor sit amet";
+            // 
+            // pnlCard
+            // 
+            this.pnlCard.BackColor = System.Drawing.SystemColors.Window;
+            this.pnlCard.Controls.Add(this.pbPicture);
+            this.pnlCard.Controls.Add(this.lblDetails);
+            this.pnlCard.Controls.Add(this.lblTitle);
+            this.pnlCard.Controls.Add(this.lblCategory);
+            this.pnlCard.Location = new System.Drawing.Point(15, 17);
+            this.pnlCard.Name = "pnlCard";
+            this.pnlCard.Size = new System.Drawing.Size(491, 451);
+            this.pnlCard.TabIndex = 4;
+            this.pnlCard.Click += new System.EventHandler(this.pnlCard_Click);
             // 
             // pbPicture
             // 
@@ -80,34 +93,22 @@
             this.pbPicture.Margin = new System.Windows.Forms.Padding(0);
             this.pbPicture.Name = "pbPicture";
             this.pbPicture.Padding = new System.Windows.Forms.Padding(12);
-            this.pbPicture.Size = new System.Drawing.Size(516, 319);
+            this.pbPicture.Size = new System.Drawing.Size(490, 319);
             this.pbPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pbPicture.TabIndex = 0;
             this.pbPicture.TabStop = false;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Window;
-            this.panel1.Controls.Add(this.pbPicture);
-            this.panel1.Controls.Add(this.lblDetails);
-            this.panel1.Controls.Add(this.lblTitle);
-            this.panel1.Controls.Add(this.lblCategory);
-            this.panel1.Location = new System.Drawing.Point(15, 17);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(516, 451);
-            this.panel1.TabIndex = 4;
             // 
             // Card
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlCard);
             this.Name = "Card";
             this.Size = new System.Drawing.Size(550, 485);
+            this.pnlCard.ResumeLayout(false);
+            this.pnlCard.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPicture)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -118,6 +119,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblCategory;
         private System.Windows.Forms.Label lblDetails;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlCard;
     }
 }

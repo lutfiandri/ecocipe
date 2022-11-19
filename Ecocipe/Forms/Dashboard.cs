@@ -230,7 +230,6 @@ namespace Ecocipe
             this.panelPage.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
-            //lblTitle.Text = childForm.Text;
         }
 
         private void ActivateMenu(object btnSender)
@@ -244,6 +243,7 @@ namespace Ecocipe
                     panelNav.Visible = true;
                     panelNav.Height = currentButton.Height;
                     panelNav.Top = currentButton.Top;
+                    currentButton.BackColor = Color.FromArgb(37, 37, 37);
                 }
             }
 
@@ -256,6 +256,7 @@ namespace Ecocipe
                 if (previousBtn.GetType() == typeof(Button))
                 {
                     panelNav.Visible = false;
+                    previousBtn.BackColor = Color.FromArgb(19, 19, 19);
                 }
             }
         }

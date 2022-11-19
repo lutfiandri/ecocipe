@@ -38,9 +38,14 @@
             // 
             // tbSearch
             // 
-            this.tbSearch.Location = new System.Drawing.Point(12, 10);
+            this.tbSearch.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.tbSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbSearch.Font = new System.Drawing.Font("Inter", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbSearch.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.tbSearch.Location = new System.Drawing.Point(28, 18);
+            this.tbSearch.Multiline = true;
             this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(781, 22);
+            this.tbSearch.Size = new System.Drawing.Size(781, 25);
             this.tbSearch.TabIndex = 2;
             this.tbSearch.Text = "  Search Ecocipe";
             // 

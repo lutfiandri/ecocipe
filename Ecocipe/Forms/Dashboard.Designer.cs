@@ -309,6 +309,7 @@
             this.Controls.Add(this.panelMenu);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Dashboard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Dashboard_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);

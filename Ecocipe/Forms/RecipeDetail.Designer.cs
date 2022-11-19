@@ -34,6 +34,7 @@
             this.gbSteps = new System.Windows.Forms.GroupBox();
             this.pbImage = new System.Windows.Forms.PictureBox();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,10 +101,26 @@
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = false;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.Transparent;
+            this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(0)))));
+            this.btnDelete.FlatAppearance.BorderSize = 3;
+            this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDelete.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(0)))));
+            this.btnDelete.Location = new System.Drawing.Point(220, 1459);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(193, 53);
+            this.btnDelete.TabIndex = 16;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            // 
             // RecipeDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.gbSteps);
             this.Controls.Add(this.gbIngredients);
@@ -126,5 +143,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.GroupBox gbSteps;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

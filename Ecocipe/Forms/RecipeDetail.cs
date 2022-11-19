@@ -23,7 +23,7 @@ namespace Ecocipe.Forms
         private string _category;
         private string _ingredients;
         private string _steps;
-        private Image _picture;
+        private string _pictureUrl;
 
         public string Title
         {
@@ -49,10 +49,10 @@ namespace Ecocipe.Forms
             set { _steps = value; gbSteps.Text = value; }
         }
         [Category("Custom Props")]
-        public Image Picture
+        public string PictureUrl
         {
-            get { return _picture; }
-            set { _picture = value; pbImage.Image = value; }
+            get { return _pictureUrl; }
+            set { _pictureUrl = value; pbImage.ImageLocation = value; }
         }
 
         #endregion

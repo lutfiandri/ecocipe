@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ecocipe.Models
 {
-    class Recipe
+    public class Recipe
     {
         private int id;
         private string title;

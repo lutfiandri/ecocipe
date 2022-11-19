@@ -1,4 +1,5 @@
 ﻿using Ecocipe.Properties;
+using Ecocipe.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,9 +15,11 @@ namespace Ecocipe.Forms
 {
     public partial class RecipeDetails : Form
     {
-        public RecipeDetails()
+        private Recipe recipe;
+        public RecipeDetails(Recipe recipeArg)
         {
             InitializeComponent();
+            recipe = recipeArg;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -38,11 +41,11 @@ namespace Ecocipe.Forms
         {
             RecipeDetail rd = new RecipeDetail();
 
-            rd.Title = "Title bos";
-            rd.Category = "Category data";
-            rd.Picture = Resources.Sample;
-            rd.Ingredients = "\nHai\nskdadhjad\naksjhdhkasjhda\njkahdskjahdkjahskdajh\nahsdka\nsdadsa\njjk\nhhh\nhhh\nhhhhhhh\nhhh\nh\nh\njkjk\njhjkhk\njjjj\njjj\njkkjhk\njkhkjhkhjk\njkhkhjkh\nkjhk\njkhkh\njkkh\nkhjkj\nhkj\nhk\njhk\nkhj\nsdad";
-            rd.Steps = "Steps";
+            rd.Title = recipe.Title;
+            rd.Category = recipe.Category;
+            rd.PictureUrl = recipe.ImageUrl;
+            rd.Ingredients = $"\nINGREDIENTS\n{recipe.Ingredients}";
+            rd.Steps = $"\nSTEPS\n{recipe.Ingredients}";
 
             flowLayoutPanel.Controls.Add(rd);
         }

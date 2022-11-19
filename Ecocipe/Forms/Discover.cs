@@ -73,11 +73,11 @@ namespace Ecocipe.Forms
             //loop trough each items
             for (int i = 0; i < cards.Length; i++)
             {
-                cards[i] = new Card();
+                cards[i] = new Card(recipes[i]);
                 cards[i].Title = recipes[i].Title;
                 cards[i].Category = recipes[i].Category;
-                cards[i].Details = "Get data details somewhere";
-                cards[i].Picture = Resources.Sample;
+                cards[i].Details = "Written by: Lutfi Andriyanto (dummy)";
+                cards[i].PictureUrl = recipes[i].ImageUrl;
                 //add to flowlayout
                 //if (flowLayoutPanel.Controls.Count > 0)
                 //{

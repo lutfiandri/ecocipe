@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ecocipe.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +13,11 @@ namespace Ecocipe.Forms
 {
     public partial class Card : UserControl
     {
-
-        public Card()
+        private Recipe recipe;
+        public Card(Recipe recipeArg)
         {
             InitializeComponent();
+            recipe = recipeArg;
         }
 
         #region Properties
@@ -23,7 +25,7 @@ namespace Ecocipe.Forms
         private string _title;
         private string _category;
         private string _details;
-        private Image _picture;
+        private string _pictureUrl;
 
         public string Title
         {
@@ -43,17 +45,17 @@ namespace Ecocipe.Forms
             set { _details = value; lblDetails.Text = value; }
         }
         [Category("Custom Props")]
-        public Image Picture
+        public string PictureUrl
         {
-            get { return _picture; }
-            set { _picture = value; pbPicture.Image = value; }
+            get { return _pictureUrl; }
+            set { _pictureUrl = value; pbPicture.ImageLocation = value; }
         }
 
         #endregion
 
         private void pnlCard_Click(object sender, EventArgs e)
         {
-            var myForm = new RecipeDetails();
+            var myForm = new RecipeDetails(recipe);
             myForm.Show();
         }
     }

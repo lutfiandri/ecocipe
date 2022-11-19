@@ -125,7 +125,7 @@ namespace Ecocipe
             switch(this.WindowState)
             {
                 case FormWindowState.Maximized:
-                    this.Padding = new Padding(0, 8, 8, 0);
+                    this.Padding = new Padding(15, 8, 8, 15);
                     break;
                 case FormWindowState.Normal:
                     if (this.Padding.Top != borderSize)

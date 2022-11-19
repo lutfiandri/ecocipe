@@ -23,17 +23,17 @@ namespace Ecocipe.Models
             return true;
         }
 
-        public Recipe CreateRecipe()
-        {
-            var recipe = new Recipe();
-            return recipe;
-        }
+        //public Recipe CreateRecipe()
+        //{
+        //    var recipe = new Recipe();
+        //    return recipe;
+        //}
 
-        public Recipe DuplicateRecipe()
-        {
-            var recipe = new Recipe();
-            return recipe;
-        }
+        //public Recipe DuplicateRecipe()
+        //{
+        //    var recipe = new Recipe();
+        //    return recipe;
+        //}
 
         public Recipe[] GetAllMyRecipes()
         {

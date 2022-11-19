@@ -16,5 +16,11 @@ namespace Ecocipe.Forms
         {
             InitializeComponent();
         }
+
+        private void btnAddRecipe_Click(object sender, EventArgs e)
+        {
+            var myForm = new AddRecipe();
+            myForm.Show();
+        }
     }
 }

@@ -16,12 +16,12 @@ namespace Ecocipe.Models
             return recipes;
         }
 
-        public Recipe GetOneRecipe()
-        {
-            // TODO: Implement get one recipe
-            Recipe recipe = new Recipe();
-            return recipe;
-        }
+        //public Recipe GetOneRecipe()
+        //{
+        //    // TODO: Implement get one recipe
+        //    Recipe recipe = new Recipe();
+        //    return recipe;
+        //}
 
     }
 }

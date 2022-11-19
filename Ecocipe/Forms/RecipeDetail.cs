@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,14 +8,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Ecocipe.Models;
 
 namespace Ecocipe.Forms
 {
     public partial class RecipeDetail : UserControl
     {
-        public RecipeDetail()
+        private NpgsqlConnection conn;
+        private Recipe recipe;
+        private RecipeDetails container;
+        public RecipeDetail(Recipe recipeArg, NpgsqlConnection connection, RecipeDetails containerArg)
         {
             InitializeComponent();
+            conn = connection;
+            recipe = recipeArg;
+            container = containerArg;
         }
 
         #region Properties
@@ -56,5 +64,25 @@ namespace Ecocipe.Forms
         }
 
         #endregion
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show($"Do you want to delete {Title}?") == DialogResult.OK)
+            {
+                var sql = @"select * from delete_recipe(:_id)";
+                var cmd = new NpgsqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("_id", recipe.Id);
+
+                if ((int)cmd.ExecuteScalar() == 1)
+                {
+                    MessageBox.Show($"{recipe.Title} successfully deleted.");
+                    container.Close();
+                }
+                else
+                {
+                    MessageBox.Show("An error occured");
+                }
+            }
+        }
     }
 }

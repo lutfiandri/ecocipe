@@ -10,16 +10,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using Npgsql;
 
 namespace Ecocipe.Forms
 {
     public partial class RecipeDetails : Form
     {
         private Recipe recipe;
-        public RecipeDetails(Recipe recipeArg)
+        private NpgsqlConnection conn;
+        public RecipeDetails(Recipe recipeArg, NpgsqlConnection connection)
         {
             InitializeComponent();
             recipe = recipeArg;
+            conn = connection;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -39,7 +42,7 @@ namespace Ecocipe.Forms
 
         private void loadRecipe()
         {
-            RecipeDetail rd = new RecipeDetail();
+            RecipeDetail rd = new RecipeDetail(recipe, conn, this);
 
             rd.Title = recipe.Title;
             rd.Category = recipe.Category;

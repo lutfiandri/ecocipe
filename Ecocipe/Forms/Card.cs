@@ -8,16 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Npgsql;
 
 namespace Ecocipe.Forms
 {
     public partial class Card : UserControl
     {
         private Recipe recipe;
-        public Card(Recipe recipeArg)
+        private NpgsqlConnection conn;
+        public Card(Recipe recipeArg, NpgsqlConnection connection)
         {
             InitializeComponent();
             recipe = recipeArg;
+            conn = connection;
         }
 
         #region Properties
@@ -55,7 +58,7 @@ namespace Ecocipe.Forms
 
         private void pnlCard_Click(object sender, EventArgs e)
         {
-            var myForm = new RecipeDetails(recipe);
+            var myForm = new RecipeDetails(recipe, conn);
             myForm.Show();
         }
     }

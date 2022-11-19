@@ -33,7 +33,7 @@
             this.rtbIngredients = new System.Windows.Forms.RichTextBox();
             this.rtbSteps = new System.Windows.Forms.RichTextBox();
             this.lblRecipeName = new System.Windows.Forms.Label();
-            this.lblAddRecipe = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.panelTop = new System.Windows.Forms.Panel();
             this.lblCategory = new System.Windows.Forms.Label();
             this.lblIngredients = new System.Windows.Forms.Label();
@@ -92,16 +92,16 @@
             this.lblRecipeName.TabIndex = 7;
             this.lblRecipeName.Text = "Recipe Name:";
             // 
-            // lblAddRecipe
+            // lblTitle
             // 
-            this.lblAddRecipe.AutoSize = true;
-            this.lblAddRecipe.Font = new System.Drawing.Font("Inter", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAddRecipe.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(0)))));
-            this.lblAddRecipe.Location = new System.Drawing.Point(158, 79);
-            this.lblAddRecipe.Name = "lblAddRecipe";
-            this.lblAddRecipe.Size = new System.Drawing.Size(202, 40);
-            this.lblAddRecipe.TabIndex = 2;
-            this.lblAddRecipe.Text = "Add Recipe";
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Inter", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(0)))));
+            this.lblTitle.Location = new System.Drawing.Point(158, 79);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(202, 40);
+            this.lblTitle.TabIndex = 2;
+            this.lblTitle.Text = "Add Recipe";
             // 
             // panelTop
             // 
@@ -208,7 +208,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(19)))));
             this.ClientSize = new System.Drawing.Size(519, 977);
-            this.Controls.Add(this.lblAddRecipe);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblImageLink);
             this.Controls.Add(this.tbImageLink);
@@ -226,6 +226,7 @@
             this.Name = "AddRecipe";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddRecipe";
+            this.Load += new System.EventHandler(this.AddRecipe_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,7 +239,7 @@
         private System.Windows.Forms.RichTextBox rtbIngredients;
         private System.Windows.Forms.RichTextBox rtbSteps;
         private System.Windows.Forms.Label lblRecipeName;
-        private System.Windows.Forms.Label lblAddRecipe;
+        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Label lblCategory;
         private System.Windows.Forms.Label lblIngredients;

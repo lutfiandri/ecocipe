@@ -84,5 +84,11 @@ namespace Ecocipe.Forms
                 }
             }
         }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            var myForm = new AddRecipe(conn, "edit", recipe);
+            myForm.Show();
+        }
     }
 }

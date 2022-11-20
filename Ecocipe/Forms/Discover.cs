@@ -18,6 +18,8 @@ namespace Ecocipe.Forms
     public partial class Discover : Form
     {
         private NpgsqlConnection conn;
+        private List<Recipe> recipes;
+
         public Discover(NpgsqlConnection connection)
         {
             InitializeComponent();
@@ -35,7 +37,7 @@ namespace Ecocipe.Forms
                 var cmd = new NpgsqlCommand(sql, Database.Connection);
                 var data = cmd.ExecuteReader();
 
-                var recipes = new List<Recipe>();
+                recipes = new List<Recipe>();
 
                 if (data.HasRows)
                 {
@@ -74,6 +76,7 @@ namespace Ecocipe.Forms
             //populate here
             Card[] cards = new Card[recipes.Count];
             //loop trough each items
+            flowLayoutPanel.Controls.Clear();
             for (int i = 0; i < cards.Length; i++)
             {
                 cards[i] = new Card(recipes[i], conn);
@@ -95,6 +98,12 @@ namespace Ecocipe.Forms
         private void flowLayoutPanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            var filteredRecipes = recipes.FindAll(recipe => recipe.Title.ToLower().Contains(tbSearch.Text.ToLower()));
+            PopulateItems(filteredRecipes);
         }
     }
 }

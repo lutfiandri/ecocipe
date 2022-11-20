@@ -32,26 +32,29 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlContainer = new System.Windows.Forms.Panel();
             this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnFilter = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.pnlContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbSearch
             // 
-            this.tbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.tbSearch.BackColor = System.Drawing.SystemColors.ControlLight;
             this.tbSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbSearch.Font = new System.Drawing.Font("Inter", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbSearch.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.tbSearch.Location = new System.Drawing.Point(44, 41);
+            this.tbSearch.Location = new System.Drawing.Point(24, 35);
             this.tbSearch.Multiline = true;
             this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(781, 25);
+            this.tbSearch.Size = new System.Drawing.Size(781, 28);
             this.tbSearch.TabIndex = 2;
             this.tbSearch.Text = "  Search Ecocipe";
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnFilter);
             this.panel1.Controls.Add(this.tbSearch);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -79,6 +82,16 @@
             this.flowLayoutPanel.TabIndex = 4;
             this.flowLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel_Paint);
             // 
+            // btnFilter
+            // 
+            this.btnFilter.Location = new System.Drawing.Point(820, 35);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(135, 28);
+            this.btnFilter.TabIndex = 3;
+            this.btnFilter.Text = "Apply Filter";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
             // Discover
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -103,5 +116,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel pnlContainer;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
+        private System.Windows.Forms.Button btnFilter;
     }
 }

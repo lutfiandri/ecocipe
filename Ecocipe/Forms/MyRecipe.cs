@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using Ecocipe.Models;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +26,67 @@ namespace Ecocipe.Forms
         {
             var myForm = new AddRecipe(conn);
             myForm.Show();
+        }
+
+        private void MyRecipe_Load(object sender, EventArgs e)
+        {
+            // get all recipes on load
+            try
+            {
+                var sql = "select * from select_all_recipes()";
+                var cmd = new NpgsqlCommand(sql, conn);
+                var data = cmd.ExecuteReader();
+
+                var recipes = new List<Recipe>();
+
+                if (data.HasRows)
+                {
+                    while (data.Read())
+                    {
+                        recipes.Add(new Recipe(
+                            data.GetInt32(0),
+                            data.GetString(1),
+                            data.GetInt32(2),
+                            data.GetString(3),
+                            data.GetString(4),
+                            data.GetString(5),
+                            data.GetString(6)
+                        ));
+                    }
+                }
+
+                PopulateItems(recipes);
+                data.Close();
+
+                Console.WriteLine(data);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void PopulateItems(List<Recipe> recipes)
+        {
+            //populate here
+            Card[] cards = new Card[recipes.Count];
+            //loop trough each items
+            for (int i = 0; i < cards.Length; i++)
+            {
+                cards[i] = new Card(recipes[i], conn);
+                cards[i].Title = recipes[i].Title;
+                cards[i].Category = recipes[i].Category;
+                cards[i].Details = "Written by: Lutfi Andriyanto (dummy)";
+                cards[i].PictureUrl = recipes[i].ImageUrl;
+                //add to flowlayout
+                //if (flowLayoutPanel.Controls.Count > 0)
+                //{
+                //    flowLayoutPanel.Controls.Clear();
+                //}
+                //else
+                flowLayoutPanel.Controls.Add(cards[i]);
+
+            }
         }
     }
 }

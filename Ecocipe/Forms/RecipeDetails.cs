@@ -32,7 +32,7 @@ namespace Ecocipe.Forms
 
         private void btnBack_MouseHover(object sender, EventArgs e)
         {
-            btnBack.Cursor = Cursors.Hand;
+            btnClose.Cursor = Cursors.Hand;
         }
 
         private void RecipeDetails_Load(object sender, EventArgs e)

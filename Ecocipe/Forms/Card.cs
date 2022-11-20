@@ -56,10 +56,57 @@ namespace Ecocipe.Forms
 
         #endregion
 
-        private void pnlCard_Click(object sender, EventArgs e)
-        {
+        private void card_Click(object sender, EventArgs e)
+        {   
             var myForm = new RecipeDetails(recipe, conn);
             myForm.Show();
         }
+
+        private void changeCursor()
+        {
+            if (this.Cursor == Cursors.Default)
+            {
+                this.Cursor = Cursors.Hand;
+            }
+            else this.Cursor = Cursors.Default;
+        }
+
+        private void stateHoverCard()
+        {
+            
+
+            pnlBorder.BackColor = Color.FromArgb(255, 181, 0);
+        }
+
+        private void changeBorderColor()
+        { 
+            Color currColor = pnlBorder.BackColor;
+            if(currColor == Color.Transparent)
+            {
+                pnlBorder.BackColor = Color.FromArgb(255, 181, 0);
+            }
+            else
+            {
+                pnlBorder.BackColor = Color.Transparent;
+            }
+        }
+
+        private void card_MouseHover(object sender, EventArgs e)
+        {
+            changeCursor();
+            stateHoverCard();
+        }
+
+        private void card_Hover(object sender, EventArgs e)
+        {
+            changeCursor();
+            changeBorderColor();
+        }
+        private void card_MouseLeave(object sender, EventArgs e)
+        {
+            changeCursor();
+            changeBorderColor();
+        }
+
     }
 }

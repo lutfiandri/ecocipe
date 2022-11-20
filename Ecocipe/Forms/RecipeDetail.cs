@@ -67,7 +67,7 @@ namespace Ecocipe.Forms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show($"Do you want to delete {Title}?") == DialogResult.OK)
+            if(MessageBox.Show($"Do you want to delete {Title}?", "Recipe deleted successfuly", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             {
                 var sql = @"select * from delete_recipe(:_id)";
                 var cmd = new NpgsqlCommand(sql, conn);

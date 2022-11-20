@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using Ecocipe.Forms;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -287,7 +288,10 @@ namespace Ecocipe
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Hide();
+            var login = new Login();
+            login.Closed += (s, args) => this.Close();
+            login.Show();
         }
 
         private void panelPage_Paint(object sender, PaintEventArgs e)

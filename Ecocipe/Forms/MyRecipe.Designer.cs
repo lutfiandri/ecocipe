@@ -28,50 +28,91 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblMyRecipe = new System.Windows.Forms.Label();
+            this.lblMyRecipes = new System.Windows.Forms.Label();
             this.btnAddRecipe = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblMyRecipe
+            // lblMyRecipes
             // 
-            this.lblMyRecipe.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblMyRecipe.AutoSize = true;
-            this.lblMyRecipe.Font = new System.Drawing.Font("Inter", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMyRecipe.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.lblMyRecipe.Location = new System.Drawing.Point(281, 184);
-            this.lblMyRecipe.Name = "lblMyRecipe";
-            this.lblMyRecipe.Size = new System.Drawing.Size(225, 49);
-            this.lblMyRecipe.TabIndex = 1;
-            this.lblMyRecipe.Text = "My Recipe";
+            this.lblMyRecipes.AutoSize = true;
+            this.lblMyRecipes.Font = new System.Drawing.Font("Inter ExtraBold", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMyRecipes.Location = new System.Drawing.Point(85, 40);
+            this.lblMyRecipes.Name = "lblMyRecipes";
+            this.lblMyRecipes.Size = new System.Drawing.Size(213, 41);
+            this.lblMyRecipes.TabIndex = 3;
+            this.lblMyRecipes.Text = "My Recipes";
             // 
             // btnAddRecipe
             // 
-            this.btnAddRecipe.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnAddRecipe.Location = new System.Drawing.Point(305, 283);
+            this.btnAddRecipe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddRecipe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(0)))));
+            this.btnAddRecipe.FlatAppearance.BorderSize = 0;
+            this.btnAddRecipe.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAddRecipe.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddRecipe.Location = new System.Drawing.Point(971, 41);
             this.btnAddRecipe.Name = "btnAddRecipe";
-            this.btnAddRecipe.Size = new System.Drawing.Size(173, 23);
+            this.btnAddRecipe.Size = new System.Drawing.Size(191, 40);
             this.btnAddRecipe.TabIndex = 2;
-            this.btnAddRecipe.Text = "Add Recipe";
-            this.btnAddRecipe.UseVisualStyleBackColor = true;
+            this.btnAddRecipe.Text = "+ Add Recipe";
+            this.btnAddRecipe.UseVisualStyleBackColor = false;
             this.btnAddRecipe.Click += new System.EventHandler(this.btnAddRecipe_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnAddRecipe);
+            this.panel1.Controls.Add(this.lblMyRecipes);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1239, 100);
+            this.panel1.TabIndex = 4;
+            // 
+            // flowLayoutPanel
+            // 
+            this.flowLayoutPanel.AutoScroll = true;
+            this.flowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel.Location = new System.Drawing.Point(20, 0);
+            this.flowLayoutPanel.Name = "flowLayoutPanel";
+            this.flowLayoutPanel.Size = new System.Drawing.Size(1199, 554);
+            this.flowLayoutPanel.TabIndex = 4;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.flowLayoutPanel);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 100);
+            this.panel2.Name = "panel2";
+            this.panel2.Padding = new System.Windows.Forms.Padding(20, 0, 20, 0);
+            this.panel2.Size = new System.Drawing.Size(1239, 554);
+            this.panel2.TabIndex = 8;
             // 
             // MyRecipe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnAddRecipe);
-            this.Controls.Add(this.lblMyRecipe);
+            this.ClientSize = new System.Drawing.Size(1239, 654);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Name = "MyRecipe";
             this.Text = "MyRecipe";
+            this.Load += new System.EventHandler(this.MyRecipe_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lblMyRecipe;
+        private System.Windows.Forms.Label lblMyRecipes;
         private System.Windows.Forms.Button btnAddRecipe;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
+        private System.Windows.Forms.Panel panel2;
     }
 }

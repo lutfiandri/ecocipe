@@ -1,5 +1,6 @@
 ﻿using Ecocipe.Models;
 using Ecocipe.Properties;
+using Ecocipe.Utils;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,9 @@ namespace Ecocipe.Forms
             try
             {
                 var sql = "select * from select_all_recipes()";
-                var cmd = new NpgsqlCommand(sql, conn);
+                //var db = new Database();
+
+                var cmd = new NpgsqlCommand(sql, Database.Connection);
                 var data = cmd.ExecuteReader();
 
                 var recipes = new List<Recipe>();

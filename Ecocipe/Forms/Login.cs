@@ -55,7 +55,8 @@ namespace Ecocipe.Forms
 
                 if(tbPassword.Text == password)
                 {
-                    var user = new User(tbUsername.Text);
+                    var id = data.GetInt32(0);
+                    var user = new User(id, tbUsername.Text);
 
                     this.Hide();
                     var dashboard = new Dashboard(user);

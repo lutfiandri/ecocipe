@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ecocipe.Models;
+using Ecocipe.Utils;
 using Npgsql;
 
 namespace Ecocipe.Forms
@@ -17,22 +18,22 @@ namespace Ecocipe.Forms
     {
         //Fields
         private int borderSize = 2;
-        private NpgsqlConnection conn;
         private string type; // add | edit
         private Recipe initialRecipe;
+        private User user;
 
-        public AddRecipe(NpgsqlConnection connection)
+        public AddRecipe(User user)
         {
             InitializeComponent();
-            conn = connection;
+
             this.Padding = new Padding(borderSize); //border size
             this.BackColor = Color.FromArgb(19, 19, 19); //border color
+            this.user = user;
         }
 
         public AddRecipe(NpgsqlConnection connection, string type, Recipe initialRecipe)
         {
             InitializeComponent();
-            conn = connection;
             this.Padding = new Padding(borderSize); //border size
             this.BackColor = Color.FromArgb(19, 19, 19); //border color
             this.type = type;
@@ -57,7 +58,7 @@ namespace Ecocipe.Forms
             if (type == "edit")
             {
                 var sql = @"select * from update_recipe(:_id, :_title, :_category, :_imageurl, :_ingredients, :_steps)";
-                cmd = new NpgsqlCommand(sql, conn);
+                cmd = new NpgsqlCommand(sql, Database.Connection);
                 cmd.Parameters.AddWithValue("_id", initialRecipe.Id);
                 cmd.Parameters.AddWithValue("_title", tbTitle.Text);
                 cmd.Parameters.AddWithValue("_category", tbCategory.Text);
@@ -68,9 +69,9 @@ namespace Ecocipe.Forms
             else
             {
                 var sql = @"select * from insert_recipe(:_title, :_author_id, :_category, :_imageurl, :_ingredients, :_steps)";
-                cmd = new NpgsqlCommand(sql, conn);
+                cmd = new NpgsqlCommand(sql, Database.Connection);
                 cmd.Parameters.AddWithValue("_title", tbTitle.Text);
-                cmd.Parameters.AddWithValue("_author_id", 1);
+                cmd.Parameters.AddWithValue("_author_id", user.Id);
                 cmd.Parameters.AddWithValue("_category", tbCategory.Text);
                 cmd.Parameters.AddWithValue("_imageurl", tbImageLink.Text);
                 cmd.Parameters.AddWithValue("_ingredients", rtbIngredients.Text);

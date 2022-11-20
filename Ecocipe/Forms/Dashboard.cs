@@ -24,6 +24,8 @@ namespace Ecocipe
         private NpgsqlConnection conn;
         private readonly string connstring = "Host=localhost;Port=5432;Username=postgres;Password=kyubi123;Database=ecocipe";
 
+        private User user;
+
         //Constructor
         public Dashboard()
         {
@@ -42,6 +44,7 @@ namespace Ecocipe
             panelNav.Visible = false;
             this.Padding = new Padding(borderSize); //border size
             this.BackColor = Color.FromArgb(19, 19, 19); //border color
+            this.user = user;
         }
 
         //Drag form
@@ -279,7 +282,7 @@ namespace Ecocipe
 
         private void btnMyRecipe_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.MyRecipe(conn), sender);
+            OpenChildForm(new Forms.MyRecipe(user), sender);
             ActivateMenu(sender);
         }
 

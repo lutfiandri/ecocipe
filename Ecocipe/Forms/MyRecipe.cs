@@ -1,4 +1,5 @@
 ﻿using Ecocipe.Models;
+using Ecocipe.Utils;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -14,17 +15,16 @@ namespace Ecocipe.Forms
 {
     public partial class MyRecipe : Form
     {
-        private NpgsqlConnection conn;
-        public MyRecipe(NpgsqlConnection connection)
+        private User user;
+        public MyRecipe(User user)
         {
             InitializeComponent();
-            conn = connection;
-
+            this.user = user;
         }
 
         private void btnAddRecipe_Click(object sender, EventArgs e)
         {
-            var myForm = new AddRecipe(conn);
+            var myForm = new AddRecipe(user);
             myForm.Show();
         }
 
@@ -33,8 +33,9 @@ namespace Ecocipe.Forms
             // get all recipes on load
             try
             {
-                var sql = "select * from select_all_recipes()";
-                var cmd = new NpgsqlCommand(sql, conn);
+                var sql = "select * from select_all_recipes(:author_id)";
+                var cmd = new NpgsqlCommand(sql, Database.Connection);
+                cmd.Parameters.AddWithValue("author_id", user.Id);
                 var data = cmd.ExecuteReader();
 
                 var recipes = new List<Recipe>();
@@ -73,7 +74,7 @@ namespace Ecocipe.Forms
             //loop trough each items
             for (int i = 0; i < cards.Length; i++)
             {
-                cards[i] = new Card(recipes[i], conn);
+                cards[i] = new Card(recipes[i], Database.Connection);
                 cards[i].Title = recipes[i].Title;
                 cards[i].Category = recipes[i].Category;
                 cards[i].Details = "Written by: Lutfi Andriyanto (dummy)";

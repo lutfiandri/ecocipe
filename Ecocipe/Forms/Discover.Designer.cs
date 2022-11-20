@@ -32,7 +32,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlContainer = new System.Windows.Forms.Panel();
             this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnFilter = new System.Windows.Forms.Button();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.pnlContainer.SuspendLayout();
             this.SuspendLayout();
@@ -54,7 +54,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnFilter);
+            this.panel1.Controls.Add(this.btnLogin);
             this.panel1.Controls.Add(this.tbSearch);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -82,15 +82,20 @@
             this.flowLayoutPanel.TabIndex = 4;
             this.flowLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel_Paint);
             // 
-            // btnFilter
+            // btnLogin
             // 
-            this.btnFilter.Location = new System.Drawing.Point(820, 35);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(135, 28);
-            this.btnFilter.TabIndex = 3;
-            this.btnFilter.Text = "Apply Filter";
-            this.btnFilter.UseVisualStyleBackColor = true;
-            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            this.btnLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(0)))));
+            this.btnLogin.FlatAppearance.BorderSize = 0;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Inter", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(19)))));
+            this.btnLogin.Location = new System.Drawing.Point(828, 35);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(135, 28);
+            this.btnLogin.TabIndex = 20;
+            this.btnLogin.Text = "Search";
+            this.btnLogin.UseVisualStyleBackColor = false;
+            this.btnLogin.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // Discover
             // 
@@ -116,6 +121,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel pnlContainer;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
-        private System.Windows.Forms.Button btnFilter;
+        private System.Windows.Forms.Button btnLogin;
     }
 }

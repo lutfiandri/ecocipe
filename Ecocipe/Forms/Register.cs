@@ -84,5 +84,10 @@ namespace Ecocipe.Forms
                 MessageBox.Show("Password and Confirm Password not match!");
             }
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -171,6 +171,7 @@
             this.btnClose.Size = new System.Drawing.Size(57, 24);
             this.btnClose.TabIndex = 3;
             this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // iconButton1
             // 

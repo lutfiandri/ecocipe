@@ -7,21 +7,15 @@ using System.Threading.Tasks;
 
 namespace Ecocipe.Models
 {
-    abstract class User
+    public class User
     {
-        public Recipe[] GetAllRecipe()
+        private string username;
+
+        public string Username { get => username; }
+
+        public User(string username)
         {
-            // TODO: Implement get recipes
-            Recipe[] recipes = { };
-            return recipes;
+            this.username = username;
         }
-
-        //public Recipe GetOneRecipe()
-        //{
-        //    // TODO: Implement get one recipe
-        //    Recipe recipe = new Recipe();
-        //    return recipe;
-        //}
-
     }
 }

@@ -1,4 +1,6 @@
-﻿using Npgsql;
+﻿using Ecocipe.Models;
+using Ecocipe.Utils;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,18 +42,38 @@ namespace Ecocipe.Forms
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if(tbUsername.Text == "lutfi" && tbPassword.Text == "lutfi123")
+            var sql = "select * from select_user(:username)";
+
+            var cmd = new NpgsqlCommand(sql, Database.Connection);
+            cmd.Parameters.AddWithValue("username", tbUsername.Text);
+            var data = cmd.ExecuteReader();
+
+            if (data.HasRows)
             {
-                this.Hide();
-                var dashboard = new Dashboard();
-                dashboard.Closed += (s, args) => this.Close();
-                dashboard.Show();
+                data.Read();
+                var password = data.GetString(2);
+
+                if(tbPassword.Text == password)
+                {
+                    var user = new User(tbUsername.Text);
+
+                    this.Hide();
+                    var dashboard = new Dashboard(user);
+                    dashboard.Closed += (s, args) => this.Close();
+                    dashboard.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Wrong username or password");
+                }
             }
             else
             {
-                MessageBox.Show("Incorrect username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Wrong username or password");
             }
-            
+
+
+            data.Close();
         }
 
         private void btnShowPass_Click(object sender, EventArgs e)

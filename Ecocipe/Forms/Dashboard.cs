@@ -1,4 +1,5 @@
 ﻿using Ecocipe.Forms;
+using Ecocipe.Models;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -31,9 +32,17 @@ namespace Ecocipe
             panelNav.Visible = false;
             this.Padding = new Padding(borderSize); //border size
             this.BackColor = Color.FromArgb(19, 19, 19); //border color
+            btnMyRecipe.Visible = false;
         }
 
-        
+        public Dashboard(User user)
+        {
+            InitializeComponent();
+            CollapseMenu();
+            panelNav.Visible = false;
+            this.Padding = new Padding(borderSize); //border size
+            this.BackColor = Color.FromArgb(19, 19, 19); //border color
+        }
 
         //Drag form
         [DllImport("user32.dll", EntryPoint = "ReleaseCapture")]

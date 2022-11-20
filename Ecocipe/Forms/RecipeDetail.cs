@@ -9,20 +9,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ecocipe.Models;
+using Ecocipe.Utils;
 
 namespace Ecocipe.Forms
 {
     public partial class RecipeDetail : UserControl
     {
-        private NpgsqlConnection conn;
         private Recipe recipe;
         private RecipeDetails container;
-        public RecipeDetail(Recipe recipeArg, NpgsqlConnection connection, RecipeDetails containerArg)
+        private User user;
+
+        public RecipeDetail(Recipe recipeArg, RecipeDetails containerArg, User user)
         {
             InitializeComponent();
-            conn = connection;
             recipe = recipeArg;
             container = containerArg;
+            this.user = user;
         }
 
         #region Properties
@@ -70,7 +72,7 @@ namespace Ecocipe.Forms
             if(MessageBox.Show($"Do you want to delete {Title}?", "Recipe deleted successfuly", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             {
                 var sql = @"select * from delete_recipe(:_id)";
-                var cmd = new NpgsqlCommand(sql, conn);
+                var cmd = new NpgsqlCommand(sql, Database.Connection);
                 cmd.Parameters.AddWithValue("_id", recipe.Id);
 
                 if ((int)cmd.ExecuteScalar() == 1)
@@ -87,8 +89,17 @@ namespace Ecocipe.Forms
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            var myForm = new AddRecipe(conn, "edit", recipe);
+            var myForm = new AddRecipe(Database.Connection, "edit", recipe);
             myForm.Show();
+        }
+
+        private void RecipeDetail_Load(object sender, EventArgs e)
+        {
+            if(recipe.AuthorId != user.Id)
+            {
+                btnEdit.Visible = false;
+                btnDelete.Visible = false;
+            }
         }
     }
 }

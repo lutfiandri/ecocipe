@@ -131,6 +131,7 @@
             this.Controls.Add(this.lblTitle);
             this.Name = "RecipeDetail";
             this.Size = new System.Drawing.Size(725, 1571);
+            this.Load += new System.EventHandler(this.RecipeDetail_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -74,7 +74,7 @@ namespace Ecocipe.Forms
             //loop trough each items
             for (int i = 0; i < cards.Length; i++)
             {
-                cards[i] = new Card(recipes[i], Database.Connection);
+                cards[i] = new Card(recipes[i], user);
                 cards[i].Title = recipes[i].Title;
                 cards[i].Category = recipes[i].Category;
                 cards[i].Details = "Written by: Lutfi Andriyanto (dummy)";

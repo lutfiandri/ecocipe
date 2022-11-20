@@ -1,4 +1,5 @@
-﻿using Ecocipe.Forms;
+﻿using Ecocipe;
+using Ecocipe.Forms;
 using Ecocipe.Models;
 using Npgsql;
 using System;
@@ -276,7 +277,14 @@ namespace Ecocipe
 
         private void btnDiscover_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.Discover(conn), sender);
+            if(user == null)
+            {
+                OpenChildForm(new Forms.Discover(), sender);
+            }
+            else
+            {
+                OpenChildForm(new Forms.Discover(user), sender);
+            }
             ActivateMenu(sender);
         }
 

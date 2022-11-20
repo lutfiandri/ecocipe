@@ -17,12 +17,12 @@ namespace Ecocipe.Forms
     public partial class RecipeDetails : Form
     {
         private Recipe recipe;
-        private NpgsqlConnection conn;
-        public RecipeDetails(Recipe recipeArg, NpgsqlConnection connection)
+        private User user;
+        public RecipeDetails(Recipe recipeArg, User user)
         {
             InitializeComponent();
             recipe = recipeArg;
-            conn = connection;
+            this.user = user;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -42,7 +42,7 @@ namespace Ecocipe.Forms
 
         private void loadRecipe()
         {
-            RecipeDetail rd = new RecipeDetail(recipe, conn, this);
+            RecipeDetail rd = new RecipeDetail(recipe, this, user);
 
             rd.Title = recipe.Title;
             rd.Category = recipe.Category;

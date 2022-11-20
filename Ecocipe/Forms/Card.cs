@@ -15,12 +15,12 @@ namespace Ecocipe.Forms
     public partial class Card : UserControl
     {
         private Recipe recipe;
-        private NpgsqlConnection conn;
-        public Card(Recipe recipeArg, NpgsqlConnection connection)
+        private User user;
+        public Card(Recipe recipeArg, User user)
         {
             InitializeComponent();
             recipe = recipeArg;
-            conn = connection;
+            this.user = user;
         }
 
         #region Properties
@@ -58,7 +58,7 @@ namespace Ecocipe.Forms
 
         private void card_Click(object sender, EventArgs e)
         {   
-            var myForm = new RecipeDetails(recipe, conn);
+            var myForm = new RecipeDetails(recipe, user);
             myForm.Show();
         }
 

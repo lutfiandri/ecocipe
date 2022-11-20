@@ -17,13 +17,18 @@ namespace Ecocipe.Forms
 {
     public partial class Discover : Form
     {
-        private NpgsqlConnection conn;
         private List<Recipe> recipes;
+        private User user;
 
-        public Discover(NpgsqlConnection connection)
+        public Discover()
         {
             InitializeComponent();
-            conn = connection;
+        }
+
+        public Discover(User user)
+        {
+            InitializeComponent();
+            this.user = user;
         }
 
         private void Discover_Load(object sender, EventArgs e)
@@ -79,17 +84,12 @@ namespace Ecocipe.Forms
             flowLayoutPanel.Controls.Clear();
             for (int i = 0; i < cards.Length; i++)
             {
-                cards[i] = new Card(recipes[i], conn);
+                cards[i] = new Card(recipes[i], user);
                 cards[i].Title = recipes[i].Title;
                 cards[i].Category = recipes[i].Category;
-                cards[i].Details = "Written by: Lutfi Andriyanto (dummy)";
+                cards[i].Details = $"Written by: Lutfi Andriyanto";
                 cards[i].PictureUrl = recipes[i].ImageUrl;
-                //add to flowlayout
-                //if (flowLayoutPanel.Controls.Count > 0)
-                //{
-                //    flowLayoutPanel.Controls.Clear();
-                //}
-                //else
+                
                 flowLayoutPanel.Controls.Add(cards[i]);
 
             }

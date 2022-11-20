@@ -63,6 +63,7 @@ namespace Ecocipe
                 conn = new NpgsqlConnection(connstring);
                 conn.Open();
                 Console.WriteLine("Database connected");
+                
             }
             catch (Exception ex)
             {

@@ -238,6 +238,10 @@
   <ItemGroup>
     <None Include="Resources\RecipePic.bmp" />
     <None Include="Resources\killua_zoldyck__hunter_x_hunter__by_llchoco_dc5746m-fullview.jpg" />
+    <None Include="Resources\img3.png" />
+    <None Include="Resources\img2.png" />
+    <None Include="Resources\img1.png" />
+    <None Include="Resources\image 7.png" />
     <Content Include="Resources\TableCreation.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

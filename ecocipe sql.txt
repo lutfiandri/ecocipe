@@ -1,0 +1,220 @@
+-- TABLE --------------------------------------------------------------------------------------
+ 
+CREATE TABLE users
+(
+    id serial PRIMARY KEY,
+    username CHARACTER varying(100),
+    password CHARACTER varying(200),
+  	unique (username)
+);
+    
+CREATE TABLE recipes
+(
+    id serial PRIMARY KEY,
+    title varchar(200),
+    author_id INT,
+  	category varchar(100),
+    imageurl varchar(3000),
+  	ingredients varchar(2000),
+  	steps varchar(2000),
+  
+    CONSTRAINT fk_recipe_author FOREIGN KEY (author_id) REFERENCES users(id)
+);
+
+ 
+-- FUNCTION -----------------------------------------------------------------------------------
+ 
+----- USERS -----
+ 
+--- insert user
+CREATE OR REPLACE FUNCTION insert_user
+(
+  username CHARACTER VARYING,
+  PASSWORD CHARACTER VARYING
+)
+RETURNS INT AS
+'
+begin
+    insert into users
+    (username, password)
+    values
+    (username, password);
+    
+    if found then
+        return 1;
+    else
+        return 0;
+    end if;
+end
+'
+LANGUAGE plpgsql;
+ 
+--- select user
+CREATE OR REPLACE FUNCTION select_user
+(
+    _id INT
+)
+RETURNS TABLE
+(
+    id INT,
+    username CHARACTER VARYING,
+    PASSWORD CHARACTER VARYING
+)
+LANGUAGE plpgsql
+AS
+'
+begin
+    return query
+    select u.id, u.username, u.password from users u where u.id = _id;
+end
+'; 
+
+CREATE OR REPLACE FUNCTION select_user
+(
+    _username CHARACTER VARYING
+)
+RETURNS TABLE
+(
+    id INT,
+    username CHARACTER VARYING,
+    PASSWORD CHARACTER VARYING
+)
+LANGUAGE plpgsql
+AS
+'
+begin
+    return query
+    select u.id, u.username, u.password from users u where u.username = _username;
+end
+'; 
+
+----- RECIPES -----
+ 
+--- insert recipe
+CREATE OR REPLACE FUNCTION insert_recipe
+(
+  _title CHARACTER VARYING,
+  _author_id INT,
+  _category CHARACTER VARYING,
+  _imageurl CHARACTER VARYING,
+  _ingredients CHARACTER VARYING,
+  _steps CHARACTER VARYING
+)
+RETURNS INT AS
+'
+begin
+    insert into recipes
+    (title, author_id, category, imageurl, ingredients, steps)
+    values
+    (_title, _author_id, _category, _imageurl, _ingredients, _steps);
+    
+    if found then
+        return 1;
+    else
+        return 0;
+    end if;
+end
+'
+LANGUAGE plpgsql;
+ 
+--- select all recipes
+CREATE OR REPLACE FUNCTION select_all_recipes()
+RETURNS TABLE
+(
+    id INT,
+    title CHARACTER VARYING,
+    author_id INT,
+    category CHARACTER VARYING,
+    imageurl CHARACTER VARYING,
+    ingredients CHARACTER VARYING,
+    steps CHARACTER VARYING,
+  	author_username CHARACTER VARYING
+)
+LANGUAGE plpgsql
+AS
+'
+begin
+    return query
+    select r.id, r.title, r.author_id, r.category, r.imageurl, r.ingredients, r.steps, u.username from recipes r
+    	left join users u on r.author_id = u.id;
+end
+';
+
+-- select * from select_all_recipes();
+
+-- drop function select_all_recipes(_id int);
+
+CREATE OR REPLACE FUNCTION select_all_recipes(_author_id INT)
+RETURNS TABLE
+(
+    id INT,
+    title CHARACTER VARYING,
+    author_id INT,
+    category CHARACTER VARYING,
+    imageurl CHARACTER VARYING,
+    ingredients CHARACTER VARYING,
+    steps CHARACTER VARYING,
+  	author_username CHARACTER VARYING
+)
+LANGUAGE plpgsql
+AS
+'
+begin
+    return query
+    select r.id, r.title, r.author_id, r.category, r.imageurl, r.ingredients, r.steps, u.username from recipes r 
+    	left join users u on r.author_id = u.id
+        where r.author_id = _author_id;
+end
+';
+ 
+ 
+--- update recipe
+CREATE OR REPLACE FUNCTION update_recipe
+(
+    _id INT,
+    _title CHARACTER VARYING,
+  	_category CHARACTER VARYING,
+    _imageurl CHARACTER VARYING,
+    _ingredients CHARACTER VARYING,
+    _steps CHARACTER VARYING
+)
+RETURNS INT AS
+'
+begin
+    update recipes set
+        title=_title,
+        category=_category,
+        imageurl=_imageurl,
+        ingredients=_ingredients,
+        steps=_steps
+        
+        where id=_id;
+    
+    if found then
+        return 1;
+    else
+        return 0;
+    end if;
+end
+'
+LANGUAGE plpgsql; 
+ 
+--- delete recipe
+CREATE OR REPLACE FUNCTION delete_recipe
+(
+    _id INT
+)
+RETURNS INT AS
+'
+begin
+    delete from recipes
+        where id=_id;
+    
+    if found then
+        return 1;
+    else
+        return 0;
+    end if;
+end
+'
+LANGUAGE plpgsql;

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
 
 namespace Ecocipe.Utils
 {
@@ -18,9 +19,14 @@ namespace Ecocipe.Utils
         {
             try
             {
-                // FIXME: move connstring to parameter (if needed)
-                MessageBox.Show("hai");
-                var connstring = "Host=localhost;Port=5432;Username=postgres;Password=kyubi123;Database=ecocipe";
+                MessageBox.Show("Please Migrate our database scheme first. Can be found in ...");
+                var host = XtraInputBox.Show("PostgreSQL Host", "Database Configuration", "localhost");
+                var port = XtraInputBox.Show("PostgreSQL Port", "Database Configuration", "5432");
+                var username = XtraInputBox.Show("PostgreSQL Username", "Database Configuration", "postgres");
+                var password = XtraInputBox.Show("PostgreSQL Password", "Database Configuration", "postgres");
+                var database = XtraInputBox.Show("PostgreSQL Database", "Database Configuration", "ecocipe");
+                //var connstring = "Host=localhost;Port=5432;Username=postgres;Password=kyubi123;Database=ecocipe";
+                var connstring = $"Host={host};Port={port};Username={username};Password={password};Database={database}";
 
                 connection = new NpgsqlConnection(connstring);
                 connection.Open();
@@ -30,6 +36,7 @@ namespace Ecocipe.Utils
             {
                 Console.WriteLine("An error occured when opening postgres connection.");
                 Console.WriteLine(ex.Message);
+                MessageBox.Show($"An error occured when opening postgres connection. {ex.Message}");
             }
         }
 

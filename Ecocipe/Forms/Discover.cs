@@ -33,42 +33,8 @@ namespace Ecocipe.Forms
 
         private void Discover_Load(object sender, EventArgs e)
         {
-            // get all recipes on load
-            try
-            {
-                var sql = "select * from select_all_recipes()";
-                //var db = new Database();
-
-                var cmd = new NpgsqlCommand(sql, Database.Connection);
-                var data = cmd.ExecuteReader();
-
-                recipes = new List<Recipe>();
-
-                if (data.HasRows)
-                {
-                    while (data.Read())
-                    {
-                        recipes.Add(new Recipe(
-                            data.GetInt32(0),
-                            data.GetString(1),
-                            data.GetInt32(2),
-                            data.GetString(3),
-                            data.GetString(4),
-                            data.GetString(5),
-                            data.GetString(6)
-                        ));
-                    }
-                }
-
-                PopulateItems(recipes);
-                data.Close();
-
-                Console.WriteLine(data);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            recipes = Recipe.FindAll();
+            PopulateItems(recipes);
         }
 
         private void Discover_FormClosing(object sender, FormClosingEventArgs e)
@@ -87,7 +53,7 @@ namespace Ecocipe.Forms
                 cards[i] = new Card(recipes[i], user);
                 cards[i].Title = recipes[i].Title;
                 cards[i].Category = recipes[i].Category;
-                cards[i].Details = $"Written by: Lutfi Andriyanto";
+                cards[i].Details = $"Created by: {recipes[i].Author.Username}";
                 cards[i].PictureUrl = recipes[i].ImageUrl;
                 
                 flowLayoutPanel.Controls.Add(cards[i]);
@@ -102,7 +68,11 @@ namespace Ecocipe.Forms
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            var filteredRecipes = recipes.FindAll(recipe => recipe.Title.ToLower().Contains(tbSearch.Text.ToLower()));
+            var filteredRecipes = recipes.FindAll(recipe => {
+                return recipe.Title.ToLower().Contains(tbSearch.Text.ToLower()) ||
+                       recipe.Author.Username.ToLower().Contains(tbSearch.Text.ToLower()) ||
+                       recipe.Category.ToLower().Contains(tbSearch.Text.ToLower());
+            });
             PopulateItems(filteredRecipes);
         }
     }

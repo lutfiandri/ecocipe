@@ -30,41 +30,8 @@ namespace Ecocipe.Forms
 
         private void MyRecipe_Load(object sender, EventArgs e)
         {
-            // get all recipes on load
-            try
-            {
-                var sql = "select * from select_all_recipes(:author_id)";
-                var cmd = new NpgsqlCommand(sql, Database.Connection);
-                cmd.Parameters.AddWithValue("author_id", user.Id);
-                var data = cmd.ExecuteReader();
-
-                var recipes = new List<Recipe>();
-
-                if (data.HasRows)
-                {
-                    while (data.Read())
-                    {
-                        recipes.Add(new Recipe(
-                            data.GetInt32(0),
-                            data.GetString(1),
-                            data.GetInt32(2),
-                            data.GetString(3),
-                            data.GetString(4),
-                            data.GetString(5),
-                            data.GetString(6)
-                        ));
-                    }
-                }
-
-                PopulateItems(recipes);
-                data.Close();
-
-                Console.WriteLine(data);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            var recipes = Recipe.FindAll(user.Id);
+            PopulateItems(recipes);
         }
 
         private void PopulateItems(List<Recipe> recipes)

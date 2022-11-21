@@ -320,6 +320,9 @@ namespace Ecocipe
 
         }
 
-        
+        private void panelTop_MouseHover(object sender, EventArgs e)
+        {
+            panelTop.Cursor = Cursors.Hand;
+        }
     }
 }

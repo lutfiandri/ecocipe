@@ -38,7 +38,7 @@
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.btnClose = new FontAwesome.Sharp.IconButton();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.btnShowConfirmPass = new FontAwesome.Sharp.IconButton();
             this.lblConfirmPass = new System.Windows.Forms.Label();
             this.tbConfirmPassword = new System.Windows.Forms.TextBox();
             this.lblLogin = new System.Windows.Forms.Label();
@@ -62,6 +62,7 @@
             this.btnShowPass.TabIndex = 33;
             this.btnShowPass.Text = "Show";
             this.btnShowPass.UseVisualStyleBackColor = false;
+            this.btnShowPass.Click += new System.EventHandler(this.btnShowPass_Click);
             // 
             // lblHaveAcc
             // 
@@ -173,22 +174,23 @@
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // iconButton1
+            // btnShowConfirmPass
             // 
-            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(47)))));
-            this.iconButton1.FlatAppearance.BorderSize = 0;
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.iconButton1.ForeColor = System.Drawing.Color.White;
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.iconButton1.IconColor = System.Drawing.Color.Black;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.Location = new System.Drawing.Point(361, 544);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(64, 32);
-            this.iconButton1.TabIndex = 37;
-            this.iconButton1.Text = "Show";
-            this.iconButton1.UseVisualStyleBackColor = false;
+            this.btnShowConfirmPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(47)))), ((int)(((byte)(47)))));
+            this.btnShowConfirmPass.FlatAppearance.BorderSize = 0;
+            this.btnShowConfirmPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnShowConfirmPass.Font = new System.Drawing.Font("Inter", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnShowConfirmPass.ForeColor = System.Drawing.Color.White;
+            this.btnShowConfirmPass.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnShowConfirmPass.IconColor = System.Drawing.Color.Black;
+            this.btnShowConfirmPass.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnShowConfirmPass.Location = new System.Drawing.Point(361, 544);
+            this.btnShowConfirmPass.Name = "btnShowConfirmPass";
+            this.btnShowConfirmPass.Size = new System.Drawing.Size(64, 32);
+            this.btnShowConfirmPass.TabIndex = 37;
+            this.btnShowConfirmPass.Text = "Show";
+            this.btnShowConfirmPass.UseVisualStyleBackColor = false;
+            this.btnShowConfirmPass.Click += new System.EventHandler(this.btnShowConfirmPass_Click);
             // 
             // lblConfirmPass
             // 
@@ -232,7 +234,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(19)))));
             this.ClientSize = new System.Drawing.Size(504, 977);
             this.Controls.Add(this.lblLogin);
-            this.Controls.Add(this.iconButton1);
+            this.Controls.Add(this.btnShowConfirmPass);
             this.Controls.Add(this.lblConfirmPass);
             this.Controls.Add(this.tbConfirmPassword);
             this.Controls.Add(this.pnlTop);
@@ -267,7 +269,7 @@
         private System.Windows.Forms.PictureBox pictureBoxLogo;
         private System.Windows.Forms.Panel pnlTop;
         private FontAwesome.Sharp.IconButton btnClose;
-        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton btnShowConfirmPass;
         private System.Windows.Forms.Label lblConfirmPass;
         private System.Windows.Forms.TextBox tbConfirmPassword;
         private System.Windows.Forms.Label lblLogin;

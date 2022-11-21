@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Ecocipe.Utils
 {
@@ -18,6 +19,7 @@ namespace Ecocipe.Utils
             try
             {
                 // FIXME: move connstring to parameter (if needed)
+                MessageBox.Show("hai");
                 var connstring = "Host=localhost;Port=5432;Username=postgres;Password=kyubi123;Database=ecocipe";
 
                 connection = new NpgsqlConnection(connstring);

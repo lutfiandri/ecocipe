@@ -18,6 +18,8 @@ namespace Ecocipe.Forms
         public Register()
         {
             InitializeComponent();
+            tbPassword.PasswordChar = '\u25CF';
+            tbConfirmPassword.PasswordChar = '\u25CF';
         }
 
         //Drag form
@@ -88,6 +90,30 @@ namespace Ecocipe.Forms
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnShowPass_Click(object sender, EventArgs e)
+        {
+            showPass();
+        }
+
+        private void btnShowConfirmPass_Click(object sender, EventArgs e)
+        {
+            showPass();
+        }
+
+        private void showPass()
+        {
+            if (tbPassword.PasswordChar == '\u25CF')
+            {
+                tbPassword.PasswordChar = '\0';
+                btnShowPass.Text = "Hide";
+            }
+            else
+            {
+                tbPassword.PasswordChar = '\u25CF';
+                btnShowPass.Text = "Show";
+            }
         }
     }
 }

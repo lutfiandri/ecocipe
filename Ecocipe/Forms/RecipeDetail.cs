@@ -69,20 +69,17 @@ namespace Ecocipe.Forms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show($"Do you want to delete {Title}?", "Recipe deleted successfuly", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            if(MessageBox.Show($"Do you want to delete {Title}?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             {
-                var sql = @"select * from delete_recipe(:_id)";
-                var cmd = new NpgsqlCommand(sql, Database.Connection);
-                cmd.Parameters.AddWithValue("_id", recipe.Id);
-
-                if ((int)cmd.ExecuteScalar() == 1)
+                var ok = Recipe.Delete(recipe.Id);
+                if (ok)
                 {
-                    MessageBox.Show($"{recipe.Title} successfully deleted.");
+                    MessageBox.Show($"{recipe.Title} deleted.");
                     container.Close();
                 }
                 else
                 {
-                    MessageBox.Show("An error occured");
+                    MessageBox.Show("An error occured when deleting recipe.");
                 }
             }
         }
@@ -95,10 +92,13 @@ namespace Ecocipe.Forms
 
         private void RecipeDetail_Load(object sender, EventArgs e)
         {
-            if(recipe.AuthorId != user.Id)
+            btnEdit.Visible = false;
+            btnDelete.Visible = false;
+
+            if(user != null && recipe.Author.Id == user?.Id)
             {
-                btnEdit.Visible = false;
-                btnDelete.Visible = false;
+                btnEdit.Visible = true;
+                btnDelete.Visible = true;
             }
         }
     }

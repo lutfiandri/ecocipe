@@ -54,31 +54,21 @@ namespace Ecocipe.Forms
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            NpgsqlCommand cmd;
+
+            var ok = false;
+
             if (type == "edit")
             {
-                var sql = @"select * from update_recipe(:_id, :_title, :_category, :_imageurl, :_ingredients, :_steps)";
-                cmd = new NpgsqlCommand(sql, Database.Connection);
-                cmd.Parameters.AddWithValue("_id", initialRecipe.Id);
-                cmd.Parameters.AddWithValue("_title", tbTitle.Text);
-                cmd.Parameters.AddWithValue("_category", tbCategory.Text);
-                cmd.Parameters.AddWithValue("_imageurl", tbImageLink.Text);
-                cmd.Parameters.AddWithValue("_ingredients", rtbIngredients.Text);
-                cmd.Parameters.AddWithValue("_steps", rtbSteps.Text);
+                var newRecipe = new Recipe(initialRecipe.Id, tbTitle.Text, initialRecipe.Author, tbCategory.Text, tbImageLink.Text, rtbIngredients.Text, rtbSteps.Text);
+                ok = Recipe.Update(newRecipe);
             } 
             else
             {
-                var sql = @"select * from insert_recipe(:_title, :_author_id, :_category, :_imageurl, :_ingredients, :_steps)";
-                cmd = new NpgsqlCommand(sql, Database.Connection);
-                cmd.Parameters.AddWithValue("_title", tbTitle.Text);
-                cmd.Parameters.AddWithValue("_author_id", user.Id);
-                cmd.Parameters.AddWithValue("_category", tbCategory.Text);
-                cmd.Parameters.AddWithValue("_imageurl", tbImageLink.Text);
-                cmd.Parameters.AddWithValue("_ingredients", rtbIngredients.Text);
-                cmd.Parameters.AddWithValue("_steps", rtbSteps.Text);
+                var newRecipe = new Recipe(0, tbTitle.Text, user, tbCategory.Text, tbImageLink.Text, rtbIngredients.Text, rtbSteps.Text);
+                ok = Recipe.Create(newRecipe);
             }
 
-            if((int)cmd.ExecuteScalar() == 1)
+            if(ok)
             {
                 var text = $"{tbTitle.Text} successfully added.";
                 if (type == "edit") text = $"{tbTitle.Text} successfully edited.";

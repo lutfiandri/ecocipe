@@ -24,14 +24,26 @@ namespace Ecocipe.Forms
 
         private void btnAddRecipe_Click(object sender, EventArgs e)
         {
-            var myForm = new AddRecipe(user);
-            myForm.Show();
+            var addRecipe = new AddRecipe(user, this);
+            addRecipe.Show();
+            //addRecipe.ReloadForm += refreshForm;
+            
+        }
+
+        //void refreshForm()
+        //{
+        //    this.Refresh();
+        //}
+
+        public void LoadData()
+        {
+            var recipes = Recipe.FindAll(user.Id);
+            PopulateItems(recipes);
         }
 
         private void MyRecipe_Load(object sender, EventArgs e)
         {
-            var recipes = Recipe.FindAll(user.Id);
-            PopulateItems(recipes);
+            LoadData();
         }
 
         private void PopulateItems(List<Recipe> recipes)
@@ -39,12 +51,13 @@ namespace Ecocipe.Forms
             //populate here
             Card[] cards = new Card[recipes.Count];
             //loop trough each items
+            flowLayoutPanel.Controls.Clear();
             for (int i = 0; i < cards.Length; i++)
             {
                 cards[i] = new Card(recipes[i], user);
                 cards[i].Title = recipes[i].Title;
                 cards[i].Category = recipes[i].Category;
-                cards[i].Details = "Written by: Lutfi Andriyanto (dummy)";
+                cards[i].Details = $"Created by: {recipes[i].Author.Username}";
                 cards[i].PictureUrl = recipes[i].ImageUrl;
                 //add to flowlayout
                 //if (flowLayoutPanel.Controls.Count > 0)

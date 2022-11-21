@@ -18,13 +18,15 @@ namespace Ecocipe.Forms
         private Recipe recipe;
         private RecipeDetails container;
         private User user;
+        public dynamic parentForm;
 
-        public RecipeDetail(Recipe recipeArg, RecipeDetails containerArg, User user)
+        public RecipeDetail(Recipe recipeArg, RecipeDetails containerArg, User user, dynamic parentForm)
         {
             InitializeComponent();
             recipe = recipeArg;
             container = containerArg;
             this.user = user;
+            this.parentForm = parentForm;
         }
 
         #region Properties
@@ -86,7 +88,7 @@ namespace Ecocipe.Forms
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            var myForm = new AddRecipe(Database.Connection, "edit", recipe);
+            var myForm = new AddRecipe("edit", recipe, parentForm);
             myForm.Show();
         }
 

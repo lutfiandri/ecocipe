@@ -19,7 +19,7 @@ namespace Ecocipe.Utils
         {
             try
             {
-                MessageBox.Show("Please Migrate our database scheme first. Can be found in ...");
+                MessageBox.Show("Please Migrate our database scheme first. Can be found in https://pastebin.com/hLigBEF6");
                 var host = XtraInputBox.Show("PostgreSQL Host", "Database Configuration", "localhost");
                 var port = XtraInputBox.Show("PostgreSQL Port", "Database Configuration", "5432");
                 var username = XtraInputBox.Show("PostgreSQL Username", "Database Configuration", "postgres");

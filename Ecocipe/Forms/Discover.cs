@@ -31,10 +31,15 @@ namespace Ecocipe.Forms
             this.user = user;
         }
 
+        public void LoadData()
+        {
+            var recipes = Recipe.FindAll();
+            PopulateItems(recipes);
+        }
+
         private void Discover_Load(object sender, EventArgs e)
         {
-            recipes = Recipe.FindAll();
-            PopulateItems(recipes);
+            LoadData();
         }
 
         private void Discover_FormClosing(object sender, FormClosingEventArgs e)

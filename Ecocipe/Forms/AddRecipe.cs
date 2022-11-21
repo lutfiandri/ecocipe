@@ -21,17 +21,21 @@ namespace Ecocipe.Forms
         private string type; // add | edit
         private Recipe initialRecipe;
         private User user;
+        private dynamic parentForm;
 
-        public AddRecipe(User user)
+        //public event Action ReloadForm;
+
+        public AddRecipe(User user, dynamic parentForm)
         {
             InitializeComponent();
 
             this.Padding = new Padding(borderSize); //border size
             this.BackColor = Color.FromArgb(19, 19, 19); //border color
             this.user = user;
+            this.parentForm = parentForm;
         }
 
-        public AddRecipe(NpgsqlConnection connection, string type, Recipe initialRecipe)
+        public AddRecipe(string type, Recipe initialRecipe, dynamic parentForm)
         {
             InitializeComponent();
             this.Padding = new Padding(borderSize); //border size
@@ -39,7 +43,7 @@ namespace Ecocipe.Forms
             this.type = type;
             this.initialRecipe = initialRecipe;
 
-            if(type == "edit")
+            if (type == "edit")
             {
                 lblTitle.Text = "Edit Recipe";
             }
@@ -54,6 +58,11 @@ namespace Ecocipe.Forms
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+            if (tbTitle.Text == "" || tbCategory.Text == "" || tbImageLink.Text == "" || rtbIngredients.Text == "" || rtbSteps.Text == "")
+            {
+                MessageBox.Show("Error. All fields are required.");
+                return;
+            }
 
             var ok = false;
 
@@ -78,6 +87,7 @@ namespace Ecocipe.Forms
             {
                 MessageBox.Show("An error occured");
             }
+            parentForm?.LoadData();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

@@ -164,9 +164,10 @@ namespace Ecocipe.Models
         {
             try
             {
-                var sql = @"select * from insert_recipe(:_title, :_category, :_imageurl, :_ingredients, :_steps)";
+                var sql = @"select * from insert_recipe(:_title, :_author_id, :_category, :_imageurl, :_ingredients, :_steps)";
                 var cmd = new NpgsqlCommand(sql, Database.Connection);
                 cmd.Parameters.AddWithValue("_title", recipe.Title);
+                cmd.Parameters.AddWithValue("_author_id", recipe.Author.Id);
                 cmd.Parameters.AddWithValue("_category", recipe.Category);
                 cmd.Parameters.AddWithValue("_imageurl", recipe.imageUrl);
                 cmd.Parameters.AddWithValue("_ingredients", recipe.Ingredients);
@@ -178,8 +179,9 @@ namespace Ecocipe.Models
                 }
                 return false;
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }

@@ -37,12 +37,12 @@ namespace Ecocipe.Forms
 
         private void RecipeDetails_Load(object sender, EventArgs e)
         {
-            loadRecipe();
+            LoadData();
         }
 
-        private void loadRecipe()
+        public void LoadData()
         {
-            RecipeDetail rd = new RecipeDetail(recipe, this, user);
+            RecipeDetail rd = new RecipeDetail(recipe, this, user, this);
 
             rd.Title = recipe.Title;
             rd.Category = recipe.Category;

@@ -54,6 +54,12 @@ namespace Ecocipe.Forms
 
         private void btnSignUp_Click(object sender, EventArgs e)
         {
+            if(tbUsername.Text == "" || tbPassword.Text == "" || tbConfirmPassword.Text == "")
+            {
+                MessageBox.Show("Error. All fields are required.");
+                return;
+            }
+
             if(tbPassword.Text == tbConfirmPassword.Text)
             {
                 var user = new User(0, tbUsername.Text, tbPassword.Text);

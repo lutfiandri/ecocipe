@@ -1,4 +1,5 @@
-﻿using Ecocipe.Utils;
+﻿using Ecocipe.Models;
+using Ecocipe.Utils;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -55,33 +56,28 @@ namespace Ecocipe.Forms
         {
             if(tbPassword.Text == tbConfirmPassword.Text)
             {
-                var sql = @"select * from insert_user(:username, :password)";
-                var cmd = new NpgsqlCommand(sql, Database.Connection);
-                cmd.Parameters.AddWithValue("username", tbUsername.Text);
-                cmd.Parameters.AddWithValue("password", tbPassword.Text);
+                var user = new User(0, tbUsername.Text, tbPassword.Text);
+                var (ok, ex) = User.Create(user);
 
-                try
+                if (ok)
                 {
-                    if ((int)cmd.ExecuteScalar() == 1)
-                    {
-                        var text = $"Register Success.";
-                        MessageBox.Show(text);
-                        lblLogin_Click(sender, e);
-                    }
-                    else
-                    {
-                        MessageBox.Show("An error occured");
-                    }
-                }
-                catch (Exception ex)
+                    var text = $"Register Success.";
+                    MessageBox.Show(text);
+                    lblLogin_Click(sender, e);
+                } 
+                else
                 {
-                    if (ex.Message.Contains("unique"))
+                    if(ex != null && ex.Message.Contains("unique"))
                     {
                         MessageBox.Show("Error. The username is already registered!");
                     }
+                    else
+                    {
+                        MessageBox.Show("An error occured when creating user.");
+                    }
                 }
-                
-            } else
+            } 
+            else
             {
                 MessageBox.Show("Password and Confirm Password not match!");
             }

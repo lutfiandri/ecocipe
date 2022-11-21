@@ -42,22 +42,11 @@ namespace Ecocipe.Forms
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            var sql = "select * from select_user(:username)";
-
-            var cmd = new NpgsqlCommand(sql, Database.Connection);
-            cmd.Parameters.AddWithValue("username", tbUsername.Text);
-            var data = cmd.ExecuteReader();
-
-            if (data.HasRows)
+            var user = User.FindOne(tbUsername.Text);
+            if(user != null)
             {
-                data.Read();
-                var password = data.GetString(2);
-
-                if(tbPassword.Text == password)
+                if (tbPassword.Text == user.Password)
                 {
-                    var id = data.GetInt32(0);
-                    var user = new User(id, tbUsername.Text);
-
                     this.Hide();
                     var dashboard = new Dashboard(user);
                     dashboard.Closed += (s, args) => this.Close();
@@ -67,14 +56,10 @@ namespace Ecocipe.Forms
                 {
                     MessageBox.Show("Wrong username or password");
                 }
-            }
-            else
+            } else
             {
                 MessageBox.Show("Wrong username or password");
             }
-
-
-            data.Close();
         }
 
         private void btnShowPass_Click(object sender, EventArgs e)

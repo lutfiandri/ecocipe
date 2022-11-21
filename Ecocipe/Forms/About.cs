@@ -16,5 +16,10 @@ namespace Ecocipe.Forms
         {
             InitializeComponent();
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

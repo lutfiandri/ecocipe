@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Ecocipe;
+using Ecocipe.Forms;
+using Ecocipe.Models;
+using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +22,11 @@ namespace Ecocipe
         private Form activeForm;
         private Button currentButton;
 
+        private NpgsqlConnection conn;
+        private readonly string connstring = "Host=localhost;Port=5432;Username=postgres;Password=kyubi123;Database=ecocipe";
+
+        private User user;
+
         //Constructor
         public Dashboard()
         {
@@ -26,6 +35,17 @@ namespace Ecocipe
             panelNav.Visible = false;
             this.Padding = new Padding(borderSize); //border size
             this.BackColor = Color.FromArgb(19, 19, 19); //border color
+            btnMyRecipe.Visible = false;
+        }
+
+        public Dashboard(User user)
+        {
+            InitializeComponent();
+            CollapseMenu();
+            panelNav.Visible = false;
+            this.Padding = new Padding(borderSize); //border size
+            this.BackColor = Color.FromArgb(19, 19, 19); //border color
+            this.user = user;
         }
 
         //Drag form
@@ -37,7 +57,30 @@ namespace Ecocipe
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Open connection to postgres
+            try
+            {
+                conn = new NpgsqlConnection(connstring);
+                conn.Open();
+                Console.WriteLine("Database connected");
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occured when opening postgres connection.", ex.Message);
+            }
+        }
 
+        private void Dashboard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occured when closing postgres connection.", ex.Message);
+            }
         }
 
         private void panelTop_MouseDown(object sender, MouseEventArgs e)
@@ -125,7 +168,7 @@ namespace Ecocipe
             switch(this.WindowState)
             {
                 case FormWindowState.Maximized:
-                    this.Padding = new Padding(0, 8, 8, 0);
+                    this.Padding = new Padding(15, 8, 8, 15);
                     break;
                 case FormWindowState.Normal:
                     if (this.Padding.Top != borderSize)
@@ -202,7 +245,6 @@ namespace Ecocipe
             this.panelPage.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
-            //lblTitle.Text = childForm.Text;
         }
 
         private void ActivateMenu(object btnSender)
@@ -216,6 +258,7 @@ namespace Ecocipe
                     panelNav.Visible = true;
                     panelNav.Height = currentButton.Height;
                     panelNav.Top = currentButton.Top;
+                    currentButton.BackColor = Color.FromArgb(37, 37, 37);
                 }
             }
 
@@ -228,19 +271,27 @@ namespace Ecocipe
                 if (previousBtn.GetType() == typeof(Button))
                 {
                     panelNav.Visible = false;
+                    previousBtn.BackColor = Color.FromArgb(19, 19, 19);
                 }
             }
         }
 
         private void btnDiscover_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.Discover(), sender);
+            if(user == null)
+            {
+                OpenChildForm(new Forms.Discover(), sender);
+            }
+            else
+            {
+                OpenChildForm(new Forms.Discover(user), sender);
+            }
             ActivateMenu(sender);
         }
 
         private void btnMyRecipe_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.MyRecipe(), sender);
+            OpenChildForm(new Forms.MyRecipe(user), sender);
             ActivateMenu(sender);
         }
 
@@ -250,9 +301,28 @@ namespace Ecocipe
             ActivateMenu(sender);
         }
 
+        private void pictureBoxLogo_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.About(), sender);
+            DisableMenu();
+        }
+
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Hide();
+            var login = new Login();
+            login.Closed += (s, args) => this.Close();
+            login.Show();
+        }
+
+        private void panelPage_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panelTop_MouseHover(object sender, EventArgs e)
+        {
+            panelTop.Cursor = Cursors.Hand;
         }
     }
 }

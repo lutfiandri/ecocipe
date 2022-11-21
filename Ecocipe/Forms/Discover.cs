@@ -1,4 +1,7 @@
-﻿using Npgsql;
+﻿using Ecocipe.Models;
+using Ecocipe.Properties;
+using Ecocipe.Utils;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,58 +10,75 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Forms;
 
 namespace Ecocipe.Forms
 {
     public partial class Discover : Form
     {
+        private List<Recipe> recipes;
+        private User user;
+
         public Discover()
         {
             InitializeComponent();
         }
 
-        private NpgsqlConnection conn;
-        private string connstring = "Host=localhost;Port=5432;Username=lutfiandri;Password=glhf;Database=ecocipe";
+        public Discover(User user)
+        {
+            InitializeComponent();
+            this.user = user;
+        }
+
+        public void LoadData()
+        {
+            var recipes = Recipe.FindAll();
+            PopulateItems(recipes);
+        }
 
         private void Discover_Load(object sender, EventArgs e)
         {
-            try
-            {
-                conn = new NpgsqlConnection(connstring);
-                conn.Open();
-                Console.WriteLine("Database connected");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occured when opening postgres connection.", ex.Message);
-            }
-
-            // get all recipes on load
-            try
-            {
-                var sql = "select * from select_all_recipes()";
-                var cmd = new NpgsqlCommand(sql, conn);
-                var data = cmd.ExecuteReader();
-                // TODO: show to UI (create the UI first)
-                Console.WriteLine(data);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            LoadData();
         }
 
         private void Discover_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try
+            
+        }
+
+        private void PopulateItems(List<Recipe> recipes)
+        {
+            //populate here
+            Card[] cards = new Card[recipes.Count];
+            //loop trough each items
+            flowLayoutPanel.Controls.Clear();
+            for (int i = 0; i < cards.Length; i++)
             {
-                conn.Close();
+                cards[i] = new Card(recipes[i], user);
+                cards[i].Title = recipes[i].Title;
+                cards[i].Category = recipes[i].Category;
+                cards[i].Details = $"Created by: {recipes[i].Author.Username}";
+                cards[i].PictureUrl = recipes[i].ImageUrl;
+                
+                flowLayoutPanel.Controls.Add(cards[i]);
+
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occured when closing postgres connection.", ex.Message);
-            }
+        }
+
+        private void flowLayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            var filteredRecipes = recipes.FindAll(recipe => {
+                return recipe.Title.ToLower().Contains(tbSearch.Text.ToLower()) ||
+                       recipe.Author.Username.ToLower().Contains(tbSearch.Text.ToLower()) ||
+                       recipe.Category.ToLower().Contains(tbSearch.Text.ToLower());
+            });
+            PopulateItems(filteredRecipes);
         }
     }
 }
